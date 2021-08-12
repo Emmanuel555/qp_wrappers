@@ -76,6 +76,7 @@ if (NOT CPLEX_STUDIO_DIR)
   endforeach ()
   if (NOT CPLEX_STUDIO_DIR_)
     set(CPLEX_STUDIO_DIR_ CPLEX_STUDIO_DIR-NOTFOUND)
+    # message(STATUS "Dun have : ${CPLEX_STUDIO_DIR_}")
   endif ()
   set(CPLEX_STUDIO_DIR ${CPLEX_STUDIO_DIR_} CACHE PATH
     "Path to the CPLEX Studio directory")
@@ -86,7 +87,9 @@ find_package(Threads)
 # ----------------------------------------------------------------------------
 # CPLEX
 
+# message("CPLEX_STUDIO_DIR " ${CPLEX_STUDIO_DIR_})
 set(CPLEX_DIR ${CPLEX_STUDIO_DIR_}/cplex)
+# message("CPLEX_DIR" ${CPLEX_DIR})
 
 # Find the CPLEX include directory.
 find_path(CPLEX_INCLUDE_DIR ilcplex/cplex.h PATHS ${CPLEX_DIR}/include)
@@ -166,7 +169,11 @@ macro(find_cplex_library var name paths)
   endif ()
 endmacro()
 
-set(CPLEX_CONCERT_DIR ${CPLEX_STUDIO_DIR}/concert)
+
+set(CPLEX_CONCERT_DIR ${CPLEX_STUDIO_DIR_}/concert)
+# message("Added_CPLEX_STUDIO_DIR " ${CPLEX_STUDIO_DIR_})
+# message("Added_CPLEX_CONCERT_DIR " ${CPLEX_CONCERT_DIR})
+
 
 # Find the Concert include directory.
 find_path(CPLEX_CONCERT_INCLUDE_DIR ilconcert/ilosys.h
@@ -234,7 +241,7 @@ endif ()
 # ----------------------------------------------------------------------------
 # CP Optimizer - depends on Concert
 
-set(CPLEX_CP_DIR ${CPLEX_STUDIO_DIR}/cpoptimizer)
+set(CPLEX_CP_DIR ${CPLEX_STUDIO_DIR_}/cpoptimizer)
 
 # Find the CP Optimizer include directory.
 find_path(CPLEX_CP_INCLUDE_DIR ilcp/cp.h PATHS ${CPLEX_CP_DIR}/include)
